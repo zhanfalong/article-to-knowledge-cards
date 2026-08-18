@@ -1,0 +1,28 @@
+name: make-knowledge-cards
+interface:
+  display_name: 知识卡片生成器
+  short_description: 将文章或 Markdown/TXT 文件提炼为 5~8 张结构化知识卡片
+  default_prompt: |
+    使用 $make-knowledge-cards 技能，为以下内容制作知识卡片：
+    ---
+    {{input_content}}
+    ---
+    请按照技能定义的步骤和格式输出，严格遵守：提取原文真实知识、一张卡片一个知识点、不编造、不强行凑数。
+model: gpt-4o-mini
+temperature: 0.2
+inputs:
+  type: object
+  properties:
+    input_content:
+      type: string
+      description: 要转换为知识卡片的文章内容，或本地 Markdown/TXT 文件的路径
+  required:
+    - input_content
+outputs:
+  type: object
+  properties:
+    cards_markdown:
+      type: string
+      description: 生成的知识卡片 Markdown 文本，按技能规定的格式组织
+  required:
+    - cards_markdown
